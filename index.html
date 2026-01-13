@@ -1,46 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Fresh Fragrances</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .product { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; }
+    button { padding: 8px 12px; cursor: pointer; }
+    #cart { border-top: 2px solid #000; margin-top: 30px; padding-top: 20px; }
+  </style>
 </head>
-<body class="bg-gray-100 p-4">
-  <header class="flex items-center justify-between mb-6">
-    <div class="flex items-center gap-2">
-      <div class="w-10 h-10 bg-black text-white flex items-center justify-center rounded-xl font-bold">
-        FF
-      </div>
-      <h1 class="text-2xl font-bold">Fresh Fragrances</h1>
-    </div>
-  </header><!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Fresh Fragrances</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 p-4">
-  <header class="flex items-center justify-between mb-6">
-    <div class="flex items-center gap-2">
-      <div class="w-10 h-10 bg-black text-white flex items-center justify-center rounded-xl font-bold">
-        FF
-      </div>
-      <h1 class="text-2xl font-bold">Fresh Fragrances</h1>
-    </div>
-  </header><!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Fresh Fragrances</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 p-4">
-  <header class="flex items-center justify-between mb-6">
-    <div class="flex items-center gap-2">
-      <div class="w-10 h-10 bg-black text-white flex items-center justify-center rounded-xl font-bold">
-        FF
-      </div>
-      <h1 class="text-2xl font-bold">Fresh Fragrances</h1>
-    </div>
-  </header>
+
+<body>
+
+<h1>Fresh Fragrances</h1>
+
+<div class="product">
+  <h2>Valentino Uomo Born in Roma</h2>
+  <select onchange="addPrice(this)">
+    <option value="">Select size</option>
+    <option value="1ml|3">1ml – $3</option>
+    <option value="2ml|5">2ml – $5</option>
+    <option value="5ml|10">5ml – $10</option>
+    <option value="10ml|18">10ml – $18</option>
+    <option value="30ml|45">30ml – $45</option>
+  </select>
+  <button onclick="addToCart('Valentino Uomo Born in Roma', this)">Add to Cart</button>
+</div>
+
+<div class="product">
+  <h2>Jean Paul Gaultier Le Beau</h2>
+  <select onchange="addPrice(this)">
+    <option value="">Select size</option>
+    <option value="1ml|3">1ml – $3</option>
+    <option value="2ml|5">2ml – $5</option>
+    <option value="5ml|10">5ml – $10</option>
+    <option value="10ml|18">10ml – $18</option>
+    <option value="30ml|45">30ml – $45</option>
+  </select>
+  <button onclick="addToCart('Jean Paul Gaultier Le Beau', this)">Add to Cart</button>
+</div>
+
+<div class="product">
+  <h2>Paco Rabanne Phantom</h2>
+  <select onchange="addPrice(this)">
+    <option value="">Select size</option>
+    <option value="1ml|3">1ml – $3</option>
+    <option value="2ml|5">2ml – $5</option>
+    <option value="5ml|10">5ml – $10</option>
+    <option value="10ml|18">10ml – $18</option>
+    <option value="30ml|45">30ml – $45</option>
+  </select>
+  <button onclick="addToCart('Paco Rabanne Phantom', this)">Add to Cart</button>
+</div>
+
+<div id="cart">
+  <h2>Cart</h2>
+  <ul id="cartItems"></ul>
+  <p><strong>Total: $<span id="total">0</span></strong></p>
+  <button onclick="checkout()">Place Order</button>
+</div>
+
+<script>
+let total = 0;
+
+function addToCart(name, btn) {
+  const select = btn.previousElementSibling;
+  if (!select.value) {
+    alert("Please select a size");
+    return;
+  }
+
+  const [size, price] = select.value.split("|");
+  const item = document.createElement("li");
+  item.textContent = `${name} - ${size} ($${price})`;
+  document.getElementById("cartItems").appendChild(item);
+
+  total += parseFloat(price);
+  document.getElementById("total").textContent = total.toFixed(2);
+}
+
+function checkout() {
+  alert("Order placed!\n\nTotal: $" + total.toFixed(2) + 
+        "\n\nNext step: We will add email + receipt.");
+}
+</script>
+
+</body>
+</html>
