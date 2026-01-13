@@ -4,23 +4,37 @@
   <meta charset="UTF-8">
   <title>Fresh Fragrances</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    h1 { text-align: center; }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
     .product {
-      border: 1px solid #ccc;
-      padding: 15px;
-      margin-bottom: 25px;
       display: flex;
       gap: 20px;
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 30px;
       align-items: center;
+      border-radius: 10px;
     }
     .product img {
-      width: 120px;
-      height: auto;
-      border-radius: 8px;
+      width: 130px;
+      border-radius: 10px;
     }
-    button { padding: 8px 12px; cursor: pointer; }
-    #cart { border-top: 2px solid #000; margin-top: 40px; padding-top: 20px; }
+    select, button {
+      padding: 8px;
+      margin-top: 10px;
+    }
+    #cart {
+      border-top: 3px solid #000;
+      padding-top: 20px;
+    }
   </style>
 </head>
 
@@ -29,7 +43,7 @@
 <h1>Fresh Fragrances</h1>
 
 <div class="product">
-  <img src="https://m.media-amazon.com/images/I/61J2rZ2GkDL.jpg" alt="Valentino Uomo Born in Roma">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Valentino_Uomo_Born_in_Roma.jpg">
   <div>
     <h2>Valentino Uomo Born in Roma</h2>
     <p>Approx. 10 sprays per ml</p>
@@ -40,14 +54,13 @@
       <option value="5ml|10">5ml – $10</option>
       <option value="10ml|18">10ml – $18</option>
       <option value="30ml|45">30ml – $45</option>
-    </select>
-    <br><br>
+    </select><br>
     <button onclick="addToCart('Valentino Uomo Born in Roma', this)">Add to Cart</button>
   </div>
 </div>
 
 <div class="product">
-  <img src="https://m.media-amazon.com/images/I/71U8nYcZKPL.jpg" alt="Jean Paul Gaultier Le Beau">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Jean_Paul_Gaultier_Le_Beau.jpg">
   <div>
     <h2>Jean Paul Gaultier Le Beau</h2>
     <p>Approx. 10 sprays per ml</p>
@@ -58,14 +71,13 @@
       <option value="5ml|10">5ml – $10</option>
       <option value="10ml|18">10ml – $18</option>
       <option value="30ml|45">30ml – $45</option>
-    </select>
-    <br><br>
+    </select><br>
     <button onclick="addToCart('Jean Paul Gaultier Le Beau', this)">Add to Cart</button>
   </div>
 </div>
 
 <div class="product">
-  <img src="https://m.media-amazon.com/images/I/61c0U9xZVUL.jpg" alt="Paco Rabanne Phantom">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/Paco_Rabanne_Phantom.jpg">
   <div>
     <h2>Paco Rabanne Phantom</h2>
     <p>Approx. 10 sprays per ml</p>
@@ -74,44 +86,4 @@
       <option value="1ml|3">1ml – $3</option>
       <option value="2ml|5">2ml – $5</option>
       <option value="5ml|10">5ml – $10</option>
-      <option value="10ml|18">10ml – $18</option>
-      <option value="30ml|45">30ml – $45</option>
-    </select>
-    <br><br>
-    <button onclick="addToCart('Paco Rabanne Phantom', this)">Add to Cart</button>
-  </div>
-</div>
-
-<div id="cart">
-  <h2>Cart</h2>
-  <ul id="cartItems"></ul>
-  <p><strong>Total: $<span id="total">0</span></strong></p>
-  <button onclick="checkout()">Place Order</button>
-</div>
-
-<script>
-let total = 0;
-
-function addToCart(name, btn) {
-  const select = btn.parentElement.querySelector("select");
-  if (!select.value) {
-    alert("Please select a size");
-    return;
-  }
-
-  const [size, price] = select.value.split("|");
-  const item = document.createElement("li");
-  item.textContent = `${name} - ${size} ($${price})`;
-  document.getElementById("cartItems").appendChild(item);
-
-  total += parseFloat(price);
-  document.getElementById("total").textContent = total.toFixed(2);
-}
-
-function checkout() {
-  alert("Order placed!\n\nTotal: $" + total.toFixed(2));
-}
-</script>
-
-</body>
-</html>
+      <optio
