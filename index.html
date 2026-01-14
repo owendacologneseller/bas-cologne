@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Fresh Fragrances</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       margin: 0;
@@ -13,9 +14,14 @@
     }
 
     header {
-      padding: 20px;
       text-align: center;
+      padding: 25px 20px;
       border-bottom: 1px solid #222;
+    }
+
+    header img {
+      width: 110px;
+      margin-bottom: 10px;
     }
 
     header h1 {
@@ -28,6 +34,15 @@
       max-width: 1100px;
       margin: auto;
       padding: 30px 20px;
+    }
+
+    #search {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 35px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
     }
 
     .product {
@@ -44,12 +59,10 @@
     .product img {
       width: 100%;
       border-radius: 12px;
-      background: #000;
     }
 
     .product h2 {
-      margin-top: 0;
-      margin-bottom: 8px;
+      margin: 0 0 8px;
       font-weight: 500;
     }
 
@@ -100,6 +113,7 @@
     #cart ul {
       list-style: none;
       padding: 0;
+      margin: 0;
     }
 
     #cart li {
@@ -125,12 +139,20 @@
 <body>
 
 <header>
+  <img src="logo.png" alt="Fresh Fragrances Logo">
   <h1>FRESH FRAGRANCES</h1>
 </header>
 
 <div class="container">
 
-  <div class="product">
+  <input
+    type="text"
+    id="search"
+    placeholder="Search fragrances..."
+    onkeyup="searchProducts()"
+  >
+
+  <div class="product product-item">
     <img src="valentino.jpg">
     <div>
       <h2>Valentino Uomo Born in Roma</h2>
@@ -147,7 +169,80 @@
     </div>
   </div>
 
-  <div class="product">
+  <div class="product product-item">
     <img src="lebeau.jpg">
     <div>
-      <h2>Je
+      <h2>Jean Paul Gaultier Le Beau</h2>
+      <p>Approx. 10 sprays per ml</p>
+      <select>
+        <option value="">Select size</option>
+        <option value="1ml|3">1ml – $3</option>
+        <option value="2ml|5">2ml – $5</option>
+        <option value="5ml|10">5ml – $10</option>
+        <option value="10ml|18">10ml – $18</option>
+        <option value="30ml|45">30ml – $45</option>
+      </select>
+      <button onclick="addToCart('Jean Paul Gaultier Le Beau', this)">Add to Cart</button>
+    </div>
+  </div>
+
+  <div class="product product-item">
+    <img src="phantom.jpg">
+    <div>
+      <h2>Paco Rabanne Phantom</h2>
+      <p>Approx. 10 sprays per ml</p>
+      <select>
+        <option value="">Select size</option>
+        <option value="1ml|3">1ml – $3</option>
+        <option value="2ml|5">2ml – $5</option>
+        <option value="5ml|10">5ml – $10</option>
+        <option value="10ml|18">10ml – $18</option>
+        <option value="30ml|45">30ml – $45</option>
+      </select>
+      <button onclick="addToCart('Paco Rabanne Phantom', this)">Add to Cart</button>
+    </div>
+  </div>
+
+  <div id="cart">
+    <h2>Your Cart</h2>
+    <ul id="cartItems"></ul>
+    <div class="total">Total: $<span id="total">0</span></div>
+    <br>
+    <button onclick="checkout()">Place Order</button>
+  </div>
+
+</div>
+
+<script>
+let total = 0;
+
+function addToCart(name, btn) {
+  const select = btn.previousElementSibling;
+  if (!select.value) {
+    alert("Please select a size");
+    return;
+  }
+  const [size, price] = select.value.split("|");
+  const li = document.createElement("li");
+  li.textContent = `${name} – ${size} ($${price})`;
+  document.getElementById("cartItems").appendChild(li);
+  total += parseFloat(price);
+  document.getElementById("total").textContent = total.toFixed(2);
+}
+
+function checkout() {
+  alert("Order placed!\nTotal: $" + total.toFixed(2));
+}
+
+function searchProducts() {
+  const input = document.getElementById("search").value.toLowerCase();
+  const products = document.getElementsByClassName("product-item");
+  for (let i = 0; i < products.length; i++) {
+    const text = products[i].innerText.toLowerCase();
+    products[i].style.display = text.includes(input) ? "grid" : "none";
+  }
+}
+</script>
+
+</body>
+</html>
